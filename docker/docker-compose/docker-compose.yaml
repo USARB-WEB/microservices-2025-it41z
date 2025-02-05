@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: postgres:17.1
+    ports:
+      - "5555:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+    networks:
+      - database_network
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "7777:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@domain.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    networks:
+      - database_network
+
+networks:
+  database_network:
+    driver: bridge
